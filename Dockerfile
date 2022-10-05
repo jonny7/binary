@@ -5,7 +5,7 @@ ARG COMMIT_HASH
 
 WORKDIR /usr/src/app
 
-COPY go.mod go.sum ./
+COPY . .
 RUN go mod download
 
 COPY . .
