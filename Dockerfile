@@ -9,6 +9,10 @@ COPY . .
 RUN go mod download
 
 COPY . .
-RUN go build -v -o /usr/local/bin/app ./... -ldflags="-w -s -X 'main.Rev=$REVISION' -X 'main.CommitHash=$COMMIT_HASH' -X 'main.BuildTS=$(date)'"
+RUN go build -ldflags="-w -s -X 'main.Rev=$REVISION' -X 'main.CommitHash=$COMMIT_HASH' -X 'main.BuildTS=$(date)'" -o main
 
-CMD ["app"]
+FROM scratch
+
+COPY --from=builder /usr/src/app/main ./main
+
+CMD ["./main"]
