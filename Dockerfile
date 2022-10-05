@@ -1,4 +1,4 @@
-FROM golang:1.19.1
+FROM golang:1.19.1 as builder
 
 ARG REVISION
 ARG COMMIT_HASH
